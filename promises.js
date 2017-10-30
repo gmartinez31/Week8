@@ -37,49 +37,68 @@ var rp = require('request-promise');
 // The function should chain the two promises together to download the URL and then save the file.
 var fs = require('fs-promise');
 
-function saveWebPage(url, filename) {
-    rp(url)
-        .then(function (url) {
-            fs.writeFile(filename, url)
-            console.log('URL saved on: ', filename);
-        })
-        .catch(function (e) {
-            console.error(e);
-        })
-}
+// function saveWebPage(url, filename) {
+//     rp(url)
+//         .then(function (url) {
+//             fs.writeFile(filename, url)
+//             console.log('URL saved on: ', filename);
+//         })
+//         .catch(function (e) {
+//             console.error(e);
+//         })
+// }
 
-saveWebPage('https://www.google.com/', 'test.js');
-
+// saveWebPage('https://www.google.com/', 'test.js');
 
 ////////////////////////////////////// Cat 2 Files /////////////////////////////////////////////////
 // Write a function that takes two input filenames and one output filename. Read the files and combine the file contents. 
 // Write the combined contents to the output file. Use a promise style to chain the reading and writing together.
-function save2files(inputfile1, inputfile2, outputfile) {
-    const promise1 = fs.readFile(inputfile1);
-    const promise2 = fs.readFile(inputfile2);
-    Promise
-        .all([promise1, promise2])
-        .then(function (buffers) {
-            var contents1 = buffers[0].toString();
-            var contents2 = buffers[1].toString();
-            full_content = contents1 + contents2;
-            return full_content;
-        })
-        .then(function (full_content) {
-            return fs.writeFile(outputfile, full_content);
-        })
-        .then(function () {
-            console.log('Files saved at: ', outputfile);
+// function save2files(inputfile1, inputfile2, outputfile) {
+//     const promise1 = fs.readFile(inputfile1);
+//     const promise2 = fs.readFile(inputfile2);
+//     Promise
+//         .all([promise1, promise2])
+//         .then(function (buffers) {
+//             // to accept any number of file inputs, this section of code will have to be modified to a for loop //
+//             var contents1 = buffers[0].toString();
+//             var contents2 = buffers[1].toString();
+//             full_content = contents1 + contents2;
+//             return full_content;
+//         })
+//         .then(function (full_content) {
+//             return fs.writeFile(outputfile, full_content);
+//         })
+//         .then(function () {
+//             console.log('Files saved at: ', outputfile);
+//         })
+//         .catch(function (e) {
+//             console.error(e);
+//         })
+// }
+
+// save2files('test.js', 'justtext.js', 'cat2files.js')
+
+////////////////////////////////////// Resolve, Reject /////////////////////////////////////////////////
+// Write a promise that adds two numbers and resolves the answer.However, if the two inputs provided are not both numbers reject the promise.
+function addNumbers(num1, num2) {
+    const p1 = new Promise(function (resolve, reject) {
+        try {
+            if (typeof num1 === 'number' && typeof num2 === 'number') {
+                var total = num1 + num2;
+            }
+            resolve(total);
+        } catch (e) {
+            reject(e);
+            console.log("Input is not a valid number!");
+        }
+    })
+    p1
+        .then(function(value) {
+            console.log(value)
         })
         .catch(function (e) {
             console.error(e);
         })
 }
-
-save2files('test.js', 'justtext.js', 'cat2files.js')
-
-
-////////////////////////////////////// Resolve, Reject /////////////////////////////////////////////////
-// Write a promise that adds two numbers and resolves the answer.However, if the two inputs provided are not both numbers reject the promise.
-
-
+addNumbers(1, 'wer');
+addNumbers(10, 20);
