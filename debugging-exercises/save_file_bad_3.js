@@ -7,10 +7,14 @@ var fs = require('fs');
 
 var amjad = 'https://amasad.me/';
 var filename = 'amjad.html';
+
 request.get(amjad)
   .then(function(html) {
     var contents = html.toUpperCase();
-    return fs.writeFile('data/amjad.html', contents);
+    return contents;
+  })
+  .then(function(contents) {
+    fs.writeFile('data/amjad.html', contents);
   })
   .then(function() {
     console.log('Wrote file ' + filename);

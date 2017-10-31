@@ -22,3 +22,7 @@ request(url)
     console.log('Something went wrong');
     console.log(err.message);
   });
+
+  // removed the .get from request
+  // simply returned contents and passed that along to the next .then
+  // removed the buffer argument in writefile. Not needed.
