@@ -44,7 +44,7 @@ var rl = readline.createInterface({
 rl.question("Artist Name? ", function(answer) {
     var artist = answer;
     var query = "INSERT INTO artist VALUES (default, $1)";
-    db.result(query, name)
+    db.result(query, artist)
         .then(function () {
             console.log('Created Artist: ', artist);
         })
