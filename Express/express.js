@@ -25,32 +25,32 @@ app.get('/cats_and_dogs', function (request, response) {
 });
 
 /////////////////////// Route Parameters //////////////////////////////////////////
-// app.get('/greet/:slug', function (request, response) {
-//     var slug = request.params.slug;
-//     response.send('Hello, ' + slug + "!");
-// });
+app.get('/greet/:slug', function (request, response) {
+    var slug = request.params.slug;
+    response.send('Hello, ' + slug + "!");
+});
 
-// ////////////////////// Query Parameters: Tell The Year You Were Born /////////////
-// app.get('/year', function (request, response) {
-//     var age = request.query.age;
-//     var year = 2017 - age || 2020
-//     response.send('You were born in ' + year + '!');
-// });
+////////////////////// Query Parameters: Tell The Year You Were Born /////////////
+app.get('/year', function (request, response) {
+    var age = request.query.age;
+    var year = 2017 - age || 2020
+    response.send('You were born in ' + year + '!');
+});
 
 ///////////////////// Templates /////////////////////////////////////////////////
 app.set('view engine', 'hbs');
 
-// app.get('/greet/:slug', function (request, response) {
-//     var name = request.params.slug;
-//     var age = request.query.age;
-//     var year = 2017 - age || 2020
-//     var context = {
-//         title: 'Hello, ' + name,
-//         name: name,
-//         year: year,
-//     };
-//     response.render('hello.hbs', context);
-// });
+app.get('/greet/:slug', function (request, response) {
+    var name = request.params.slug;
+    var age = request.query.age;
+    var year = 2017 - age || 2020
+    var context = {
+        title: 'Hello, ' + name,
+        name: name,
+        year: year,
+    };
+    response.render('hello.hbs', context);
+});
 
 ///////////////////// Templates 2 ///////////////////////////////////////////////
 var animals = [
