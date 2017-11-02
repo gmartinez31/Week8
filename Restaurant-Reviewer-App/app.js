@@ -16,10 +16,10 @@ app.get('/', function (request, response) {
 
 // SEARCH //
 app.get('/submit', function (request, response, next) {
-    var term = request.query.search;
+    let term = request.query.search;
     console.log('Search Term: ', term);
     // %name% = anything containing name; # = ignore the quotes because we put them in ourselves //
-    var query = "SELECT * FROM restaurant WHERE restaurant.name ILIKE '%$1#%'"
+    let query = "SELECT * FROM restaurant WHERE restaurant.name ILIKE '%$1#%'"
     db.any(query, term)
     .then(function (resultsArray) {
             console.log(resultsArray);
@@ -30,8 +30,8 @@ app.get('/submit', function (request, response, next) {
 
 // RESTAURANT INFO//
 app.get('/restaurant/:id', function(request, response, next) {
-    var id = request.params.id;
-    var query = `SELECT
+    let id = request.params.id;
+    let query = `SELECT
                     restaurant.name,
                     restaurant.address,
                     restaurant.category,
@@ -59,6 +59,29 @@ app.get('/restaurant/:id', function(request, response, next) {
         .catch(next);
 });
 
+// Submit Review | **NOT COMPLETE** //
+app.post('/submit_review/:id', function(request, response, next) {
+    // all the request.body items //
+    let query = `INSERT INTO review VALUES($1,$2,$3,$4,$5)`;
+    db.result(query, []) // <--- All request.body items go inside array
+        .then(function () {
+            response.redirect('/');
+        })
+        .catch(next);
+
+});
+
+// Submit New Restaurant | **NOT COMPLETE** //
+app.post('/restaurant/new', function(request, response, next) {
+    // all the request.body items //
+    let query = `INSERT INTO restaurant VAlUES()`;
+    db.result(query, []) // <--- All requst.body items go inside array
+        .then(function () {
+            response.redirect('/')
+        })
+        .catch(next);
+    response.render('newrestaurant.hbs');
+})
 
 app.listen(8000, function () {
     console.log('Listening on Port 8000 bruhhhhhh');

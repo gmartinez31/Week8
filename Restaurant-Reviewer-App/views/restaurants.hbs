@@ -1,17 +1,43 @@
 <div class='containter-fluid'>
-    <div class='row'>
+    <div id='stats' class='row'>
         <div class='col'>
-            <h1><strong>{{restaurant.restaurant_name}}</strong></h1>
+            <h1><strong>{{restaurant.name}}</strong></h1>
             <p>Address: {{restaurant.address}}</p>
-            <p>Category: {{restaurant.catergory}}</p>
+            <p>Category: {{restaurant.category}}</p>
             {{#if reviews}}
                 <h2>Reviews</h2>
+                <hr>
                 {{#each reviews}}
-                    <h3>{{title}}</h3>
+                    <p>Review Title: {{title}}<p>
+                    <p>Review: {{review}}</p>
                     <p>Author: {{reviewer_name}}</p>
                     <p>Stars: {{stars}}</p>
+                    <hr>
                 {{/each}}
             {{/if}}
+        </div>
+        <div class='col'>
+            <h2>Write Your Own Review</h2>
+            <form action="/submit_review/{{restaurant.id}}" method="POST">
+                <label>Title: </label>
+                <br>
+                <input type="text" name="title">
+                <br>
+                <label>Stars:</label>
+                <select name="stars">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <br>
+                <label>Contents:</label>
+                <br>
+                <textarea name="review" cols="40" rows="6"></textarea>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
 </div>

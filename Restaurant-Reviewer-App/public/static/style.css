@@ -14,3 +14,10 @@
 #card {
     margin: auto;
 }
+
+#stats {
+    margin: 10% auto;
+    width: 50%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
