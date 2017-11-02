@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='../static/style.css' type="text/css" rel='stylesheet'>
+    <title>{{title}}</title>
+</head>
+<body>
+    <div class='nav'>
+        <nav>
+            <div class="nav-wrapper teal darken-2">
+                <a href="/" class="brand-logo center">ToDo App</a>
+                <ul class="left hide-on-med-and-down">
+                    <li>
+                        <a href="/add">Add a ToDo</a>
+                    </li>
+                    <li>
+                        <a href="/done">Accomplished</a>
+                    </li>
+                    <li>
+                        <a href="/">About</a>
+                    </li>
+                    <li>
+                        <a href="/">Contact us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {{{body}}}
+    <footer class="page-footer teal darken-2">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">ToDo App</h5>
+                    <p class="grey-text text-lighten-4">Track everything and anything you need to get done here!</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="/add">Add a ToDo</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="/done.hbs">Accomplished</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="/">About</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="/">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="https://myspace.com/">Don't click this.</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
