@@ -4,14 +4,58 @@ const app = express();
 const pgp = require('pg-promise')({ promiseLib: Promise});
 const db = pgp({database: 'goose'});
 const body_parser = require('body-parser');
+const session = require('express-session');
+const morgan = require('morgan');
+// const passhelper = require('pbkdf2-helpers');
+const pbkdf2 = require('pbkdf2');
+const crypto = require('crypto');
 
 app.use(body_parser.urlencoded({extended: false}));
 app.use(express.static('public'));
+app.use(session({
+    secret: process.env.SECRET_KEY || 'dev',
+    resave: true,
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 }
+}));
+app.use(morgan('dev'));
+app.use(function (request, response, next) {
+    if (request.session.user) {
+        next();
+    } else if (request.path == '/login') {
+        next();
+    } else {
+        response.redirect('/login');
+    }
+});
 app.set('view engine', 'hbs');
+
+
+// LOGIN //
+app.get('/login', function(request, response) {
+    response.render('login.hbs');
+});
+app.post('/login', function(request, response) {
+    let email = request.body.email;
+    let password = request.body.password;
+    let query = `SELECT reviewer.email, reviewer.password FROM reviewer WHERE reviewer.email = $1`;    
+    db.any(query, email)
+    // .then(db.any(passwordq, password))
+    .then(function(results){
+        console.log(results[0].email);
+        if (results[0] && email == results[0].email && password == results[0].password) {
+            request.session.user = email
+            request.session.data = 'data';
+            response.redirect('/');
+        } else {
+            response.render('login.hbs');
+        }
+    })
+});
 
 // HOME //
 app.get('/', function (request, response) {
-    response.render('index.hbs')
+    response.render('index.hbs');
 });
 
 // SEARCH //
@@ -82,6 +126,7 @@ app.post('/restaurant/new', function(request, response, next) {
         .catch(next);
     response.render('newrestaurant.hbs');
 })
+
 
 app.listen(8000, function () {
     console.log('Listening on Port 8000 bruhhhhhh');

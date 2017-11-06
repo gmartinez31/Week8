@@ -21,3 +21,17 @@
     border: 2px solid black;
     border-radius: 10px;
 }
+
+.login {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 5em;
+}
+
+.brand-logo {
+  padding-left: 1em;
+}
+
+ul.right {
+  padding-right: 2em;
+}

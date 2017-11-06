@@ -13,6 +13,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "materialize-css": "^0.100.2",
+    "pbkdf2-helpers": "^1.1.1",
     "pg-promise": "^7.2.0"
   }
 }
